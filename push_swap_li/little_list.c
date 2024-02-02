@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 10:20:50 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/02 15:20:07 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/02 15:37:30 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	little_nb(t_swap *lst)
 {
 	if (ft_lstsize_p(lst) == 2)
 		two_nb(lst);
-	// else if (ft_lstsize_p(lst) == 2)
-	// 	three_nb(lst);
+	else if (ft_lstsize_p(lst) == 3)
+		three_nb(lst);
 }
 
 int lst_content(t_swap *lst, int i)

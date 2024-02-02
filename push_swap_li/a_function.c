@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:17:48 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/02 13:39:16 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/02 15:40:08 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void swap_a(t_swap **lst)
         tmp->next = *lst;
         (*lst)->prev = tmp;
         *lst = tmp;
+		print_lst(*lst);
     }
 }
 
@@ -66,6 +67,7 @@ void	rotate_a(t_swap	**lst)
 		last->next = first;
 		first->prev = last;
 		first->next = NULL;
+		print_lst(*lst);
 	}
 	
 }
@@ -85,5 +87,6 @@ void	reverse_rotate_a(t_swap	**lst)
 		first->prev = last;
 		*lst = last;
 		(*lst)->next = first;
+		print_lst(*lst);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:21:07 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/02 15:26:59 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/02 15:38:54 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int		ft_lstsize_p(t_swap *lst);
 int		lst_content(t_swap *lst, int i);
 t_swap	*ft_lstnew_p(int content);
 
-void	print_lst(t_swap *lst, t_swap *lstb);
+void	print_lst(t_swap *lst);
 
 #endif
