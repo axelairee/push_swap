@@ -6,65 +6,77 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 10:20:50 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/02 15:37:30 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/08 15:37:23 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	two_nb(t_swap *lst)
+void	two_nb(t_swap **lst)
 {
-	if (lst_content(lst, 0) > lst_content(lst, 1))
-		swap_a(&lst);
+	if (lst_content(*lst, 0) > lst_content(*lst, 1))
+		swap_a(lst);
 	else
 		return;
 }
 
-void	three_nb(t_swap	*lst)
+void	three_nb(t_swap	**lst)
 {
-	if (lst_content(lst, 0) > lst_content(lst, 2) && lst_content(lst, 2) > lst_content(lst, 1))
-		rotate_a(&lst);
-	else if (lst_content(lst, 0) < lst_content(lst, 2) && lst_content(lst, 1) > lst_content(lst, 2))
+	if (lst_content(*lst, 0) > lst_content(*lst, 2) && lst_content(*lst, 2) > lst_content(*lst, 1))
+		rotate_a(lst);
+	else if (lst_content(*lst, 0) < lst_content(*lst, 2) && lst_content(*lst, 1) > lst_content(*lst, 2))
 	{
-		reverse_rotate_a(&lst);
-		swap_a(&lst);
+		reverse_rotate_a(lst);
+		swap_a(lst);
 	}
-	else if (lst_content(lst, 0) < lst_content(lst, 2) && lst_content(lst, 0) > lst_content(lst, 1))
-		swap_a(&lst);
-	else if (lst_content(lst, 0) > lst_content(lst, 1) && lst_content(lst, 1) > lst_content(lst, 2))
+	else if (lst_content(*lst, 0) < lst_content(*lst, 2) && lst_content(*lst, 0) > lst_content(*lst, 1))
+		swap_a(lst);
+	else if (lst_content(*lst, 0) > lst_content(*lst, 1) && lst_content(*lst, 1) > lst_content(*lst, 2))
 	{
-		rotate_a(&lst);
-		swap_a(&lst);
+		rotate_a(lst);
+		swap_a(lst);
 	}
-	else if (lst_content(lst, 0) < lst_content(lst, 1) && lst_content(lst, 0) > lst_content(lst, 2))
-		reverse_rotate_a(&lst);
+	else if (lst_content(*lst, 0) < lst_content(*lst, 1) && lst_content(*lst, 0) > lst_content(*lst, 2))
+		reverse_rotate_a(lst);
 	else
 		return;
 }
 
-// void	four_five_nb(t_swap	*(*lst))
-// {
-// 	while ((*lst)->len_a == 0)
-// 	{
-// 		if ((*lst)->(*lst)_a[0] < lst_content(lst, 1))
-// 			push_b((*lst));
-// 		else
-// 		{
-// 			swap_a((*lst));
-// 			push_b((*lst));
-// 		}
-// 		(*lst)->len_a--;
-// 		(*lst)->len_b++;
-// 	}
-	
-// }
-
-void	little_nb(t_swap *lst)
+void	four_nb(t_swap	**lst, t_swap **lstb)
 {
-	if (ft_lstsize_p(lst) == 2)
+	if (is_sort(*lst, *lstb) == 1)
+		return;
+	r_or_rr4(lst);
+	push_b(lst, lstb);
+	three_nb(lst);
+	push_a(lst, lstb);
+}
+
+void	five_nb(t_swap	**lst, t_swap **lstb)
+{
+	if (is_sort(*lst, *lstb) == 1)
+		return;
+	r_or_rr5(lst);
+	push_b(lst, lstb);
+	r_or_rr4(lst);
+	push_b(lst, lstb);
+	three_nb(lst);
+	if ((*lstb)->content < (*lstb)->next->content)
+		swap_b(lstb);
+	push_a(lst, lstb);
+	push_a(lst, lstb);
+}
+
+void	little_nb(t_swap **lst, t_swap **lstb)
+{
+	if (ft_lstsize_p(*lst) == 2)
 		two_nb(lst);
-	else if (ft_lstsize_p(lst) == 3)
+	else if (ft_lstsize_p(*lst) == 3)
 		three_nb(lst);
+	else if (ft_lstsize_p(*lst) == 4)
+		four_nb(lst, lstb);
+	else if (ft_lstsize_p(*lst) == 5)
+		five_nb(lst, lstb);
 }
 
 int lst_content(t_swap *lst, int i)
@@ -74,6 +86,36 @@ int lst_content(t_swap *lst, int i)
 		lst = lst->next;
 		i--;
 	}
-	
 	return (lst->content);
+}
+
+void	r_or_rr4(t_swap **lst)
+{
+	if (pos_min(*lst) == 1)
+		rotate_a(lst);
+	else if (pos_min(*lst) == 2)
+	{
+		rotate_a(lst);
+		rotate_a(lst);
+	}
+	else if (pos_min(*lst) == 3)
+		reverse_rotate_a(lst);
+}
+
+void	r_or_rr5(t_swap **lst)
+{
+	if (pos_min(*lst) == 1)
+		rotate_a(lst);
+	else if (pos_min(*lst) == 2)
+	{
+		rotate_a(lst);
+		rotate_a(lst);
+	}
+	else if (pos_min(*lst) == 3)
+	{
+		reverse_rotate_a(lst);
+		reverse_rotate_a(lst);
+	}
+	else if (pos_min(*lst) == 4)
+		reverse_rotate_a(lst);
 }

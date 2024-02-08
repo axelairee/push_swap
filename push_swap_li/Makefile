@@ -6,7 +6,7 @@
 #    By: abolea <abolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 11:32:23 by abolea            #+#    #+#              #
-#    Updated: 2024/02/02 13:50:46 by abolea           ###   ########.fr        #
+#    Updated: 2024/02/08 15:37:18 by abolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ PRINTF_FILE	=	ft_printf/libftprintf.a
 
 LIBFT_FILE	=	libft/libft.a
 
-SRC = main.c fill_stack.c list.c check_error.c a_function.c little_list.c
-#  b_function.c a_b_functions.c 
+SRC = main.c fill_stack.c list.c check_error.c a_function.c \
+little_list.c b_function.c utils.c algo.c
+#   a_b_functions.c 
 
 OBJ = $(SRC:.c=.o)
 

@@ -19,24 +19,23 @@ void	ft_exit()
 
 void	fill_lst(t_swap **lst, char **argv, int argc)
 {
-	int		i;
-	int		j;
-	t_swap	*new_l;
+	int i, j;
+	char *arg;
 
 	i = 1;
 	while (i < argc)
 	{
+		arg = argv[i];
 		j = 0;
-		while (argv[i][j])
+		while (arg[j])
 		{
-			if (argv[i][j] != ' ')
+			if (arg[j] != ' ')
 			{
-				new_l = ft_lstnew_p(ft_atoi_swap(&argv[i][j]));
-				ft_lstadd_back_p(lst, new_l);
+				ft_lstadd_back_p(lst, ft_lstnew_p(ft_atoi_swap(&arg[j])));
+				while (arg[j] && arg[j] != ' ')
+					j++;
 			}
-			while (argv[i][j] >= '0' && argv[i][j] <= '9')
-				j++;
-			if (argv[i][j])
+			else
 				j++;
 		}
 		i++;
@@ -52,10 +51,12 @@ int	ft_atoi_swap(char *nptr)
 	nb = 0;
 	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
 		nptr++;
-	if (*nptr == '-')
-		sign *= -1;
 	if (*nptr == '-' || *nptr == '+')
+	{
+		if (*nptr == '-')
+			sign *= -1;
 		nptr++;
+	}
 	while (*nptr >= '0' && *nptr <= '9')
 	{
 		nb = nb * 10 + (*nptr - '0');
@@ -66,13 +67,18 @@ int	ft_atoi_swap(char *nptr)
 	return ((int)(nb * sign));
 }
 
-int	is_sort(t_swap *lst)
+int	is_sort(t_swap *lst, t_swap *lstb)
 {
-	while (lst->next)
+	if (lst && !lstb)
 	{
-		if (lst->content > lst->next->content)
-			return (ft_printf("\nlist is not sort\n"));
-		lst = lst->next;
+		while (lst->next)
+		{
+			if (lst->content > lst->next->content)
+				return (ft_printf("\nlist is not sort\n"), 0);
+			lst = lst->next;
+		}
+		return (ft_printf("\nlist is sort\n"), 1);
 	}
-	return (ft_printf("\nlist is sort\n"));
+	else
+		return (ft_printf("\nlist is not sort\n"), 0);
 }

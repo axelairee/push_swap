@@ -6,79 +6,90 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:31:23 by abolea            #+#    #+#             */
-/*   Updated: 2024/01/31 10:57:03 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/08 14:22:32 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void swap_b(t_swap *stack)
+void swap_b(t_swap **lstb) 
 {
-	int	tmp;
+	t_swap	*tmp;
 	
-	if (stack->len_b >= 2)
+    if ((*lstb)->next)
 	{
-		tmp = stack->stack_b[0];
-		stack->stack_b[0] = stack->stack_b[1];
-		stack->stack_b[1] = tmp;
-	}
+		tmp = (*lstb)->next;
+		
+        (*lstb)->next = tmp->next;
+        if (tmp->next != NULL) 
+            tmp->next->prev = *lstb;
+        tmp->prev = NULL;
+        tmp->next = *lstb;
+        (*lstb)->prev = tmp;
+        *lstb = tmp;
+    }
+	ft_printf("sb\n");
 }
 
-void	push_b(t_swap *stack)
+void	push_b(t_swap **lst, t_swap **lstb)
 {
-	int	len1;
-	int len2;
+	t_swap	*first;
+	t_swap	*second;
 
-	len1 = 0;
-	len2 = stack->len_b;
-	if (stack->len_a > 0)
+	if (*lst)
 	{
-		while (len2 >= 0)
+		first = *lst;
+		second = (*lst)->next;
+		if (*lstb)
 		{
-			stack->stack_b[len2 + 1] = stack->stack_b[len2];
-			len2--;
+			first->next = *lstb;
+			(*lstb)->prev = first;
 		}
-		stack->stack_b[0] = stack->stack_a[0];
-		stack->len_a--;
-		stack->len_b++;
-		while (len1 < stack->len_a + 1)
+		else
 		{
-			stack->stack_a[len1] = stack->stack_a[len1 + 1];
-			len1++;
+			first->next = NULL;
 		}
+		if (second)
+			second->prev = NULL;
+		*lst = second;
+		*lstb = first;
 	}
+	ft_printf("pb\n");
 }
 
-void	rotate_b(t_swap	*stack)
+void	rotate_b(t_swap	**lstb)
 {
-	int	tmp;
-	int	i;
+	t_swap	*last;
+	t_swap	*first;
 
-	i = 0;
-	tmp = stack->stack_b[0];
-	if (stack->len_b <= 1)
-		return;
-	while (i < stack->len_b - 1)
+	if (*lstb && (*lstb)->next)
 	{
-		stack->stack_b[i] = stack->stack_b[i + 1];
-		i++;
+		last = ft_lstlast_p(*lstb);
+		first = *lstb;
+		*lstb = (*lstb)->next;
+		(*lstb)->prev = NULL;
+		last->next = first;
+		first->prev = last;
+		first->next = NULL;
 	}
-	stack->stack_b[stack->len_b - 1] = tmp;
+	ft_printf("rb\n");
 }
 
-void	reverse_rotate_b(t_swap	*stack)
+void	reverse_rotate_b(t_swap	**lstb)
 {
-	int	tmp;
-	int	i;
+	t_swap	*last;
+	t_swap	*first;
 
-	i = stack->len_b - 1;
-	tmp = stack->stack_b[stack->len_b - 1];
-	if (stack->len_b <= 1)
-		return;
-	while (i > 0)
+	if (*lstb && (*lstb)->next)
 	{
-		stack->stack_b[i] = stack->stack_b[i - 1];
-		i--;
+		last = ft_lstlast_p(*lstb);
+		first = *lstb;
+		last->prev->next = NULL;
+		last->prev = NULL;
+		last->next = first;
+		first->prev = last;
+		*lstb = last;
+		(*lstb)->next = first;
 	}
-	stack->stack_b[0] = tmp;
+	ft_printf("rrb\n");
 }

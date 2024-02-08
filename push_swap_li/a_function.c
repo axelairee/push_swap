@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:17:48 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/02 15:40:08 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/08 14:22:19 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,35 @@ void swap_a(t_swap **lst)
         tmp->next = *lst;
         (*lst)->prev = tmp;
         *lst = tmp;
-		print_lst(*lst);
+		ft_printf("sa\n");
     }
 }
 
-// void	push_a(t_swap **lst, t_swap **lstb)
-// {
-// 	if (*lst)
-// 	{
-// 		*lst = (*lst)->next;
-// 		if ((*lstb))
-// 		{
-// 			(*lstb)->prev = NULL;
-// 			*lstb = (*lstb)->next;
-// 			(*lstb)->next->prev = *lst;
-// 		}
-// 		else
-// 		{
-// 			(*lstb)->prev = NULL;
-// 			(*lstb)->next = *lst;
-// 			(*lstb)->next->prev = NULL;
-// 		}
-// 		*lstb = (*lstb)->prev;
-// 	}
-// }
+void	push_a(t_swap **lst, t_swap **lstb)
+{
+	t_swap	*first;
+	t_swap	*second;
+
+	if (*lstb)
+	{
+		first = *lstb;
+		second = (*lstb)->next;
+		if (*lst)
+		{
+			first->next = *lst;
+			(*lst)->prev = first;
+		}
+		else
+		{
+			first->next = NULL;
+		}
+		if (second)
+			second->prev = NULL;
+		*lstb = second;
+		*lst = first;
+	}
+	ft_printf("pa\n");
+}
 
 
 void	rotate_a(t_swap	**lst)
@@ -67,8 +72,8 @@ void	rotate_a(t_swap	**lst)
 		last->next = first;
 		first->prev = last;
 		first->next = NULL;
-		print_lst(*lst);
 	}
+	ft_printf("ra\n");
 	
 }
 
@@ -87,6 +92,6 @@ void	reverse_rotate_a(t_swap	**lst)
 		first->prev = last;
 		*lst = last;
 		(*lst)->next = first;
-		print_lst(*lst);
 	}
+	ft_printf("rra\n");
 }
