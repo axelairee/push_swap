@@ -6,29 +6,28 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:17:48 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/08 14:22:19 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/15 15:46:35 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void swap_a(t_swap **lst) 
+void	swap_a(t_swap **lst)
 {
 	t_swap	*tmp;
-	
-    if ((*lst)->next)
+
+	if ((*lst)->next)
 	{
 		tmp = (*lst)->next;
-		
-        (*lst)->next = tmp->next;
-        if (tmp->next != NULL) 
-            tmp->next->prev = *lst;
-        tmp->prev = NULL;
-        tmp->next = *lst;
-        (*lst)->prev = tmp;
-        *lst = tmp;
+		(*lst)->next = tmp->next;
+		if (tmp->next != NULL)
+			tmp->next->prev = *lst;
+		tmp->prev = NULL;
+		tmp->next = *lst;
+		(*lst)->prev = tmp;
+		*lst = tmp;
 		ft_printf("sa\n");
-    }
+	}
 }
 
 void	push_a(t_swap **lst, t_swap **lstb)
@@ -57,7 +56,6 @@ void	push_a(t_swap **lst, t_swap **lstb)
 	ft_printf("pa\n");
 }
 
-
 void	rotate_a(t_swap	**lst)
 {
 	t_swap	*last;
@@ -74,7 +72,6 @@ void	rotate_a(t_swap	**lst)
 		first->next = NULL;
 	}
 	ft_printf("ra\n");
-	
 }
 
 void	reverse_rotate_a(t_swap	**lst)

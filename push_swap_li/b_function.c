@@ -6,28 +6,27 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:31:23 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/08 14:22:32 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/15 15:47:57 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void swap_b(t_swap **lstb) 
+void	swap_b(t_swap **lstb)
 {
 	t_swap	*tmp;
-	
-    if ((*lstb)->next)
+
+	if ((*lstb)->next)
 	{
 		tmp = (*lstb)->next;
-		
-        (*lstb)->next = tmp->next;
-        if (tmp->next != NULL) 
-            tmp->next->prev = *lstb;
-        tmp->prev = NULL;
-        tmp->next = *lstb;
-        (*lstb)->prev = tmp;
-        *lstb = tmp;
-    }
+		(*lstb)->next = tmp->next;
+		if (tmp->next != NULL)
+			tmp->next->prev = *lstb;
+		tmp->prev = NULL;
+		tmp->next = *lstb;
+		(*lstb)->prev = tmp;
+		*lstb = tmp;
+	}
 	ft_printf("sb\n");
 }
 

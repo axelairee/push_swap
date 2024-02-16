@@ -12,15 +12,11 @@
 
 #include "push_swap.h"
 
-void	ft_exit()
-{
-	exit(ft_printf("ERROR"));
-}
-
 void	fill_lst(t_swap **lst, char **argv, int argc)
 {
-	int i, j;
-	char *arg;
+	int		j;
+	int		i;
+	char	*arg;
 
 	i = 1;
 	while (i < argc)
@@ -63,7 +59,7 @@ int	ft_atoi_swap(char *nptr)
 		nptr++;
 	}
 	if (nb > INT_MAX || nb < INT_MIN)
-			ft_exit();
+		exit(ft_printf("ERROR"));
 	return ((int)(nb * sign));
 }
 
@@ -74,11 +70,11 @@ int	is_sort(t_swap *lst, t_swap *lstb)
 		while (lst->next)
 		{
 			if (lst->content > lst->next->content)
-				return (ft_printf("\nlist is not sort\n"), 0);
+				return (0);
 			lst = lst->next;
 		}
-		return (ft_printf("\nlist is sort\n"), 1);
+		return (ft_printf("b"), 1);
 	}
 	else
-		return (ft_printf("\nlist is not sort\n"), 0);
+		return (0);
 }

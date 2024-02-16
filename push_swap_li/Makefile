@@ -6,7 +6,7 @@
 #    By: abolea <abolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 11:32:23 by abolea            #+#    #+#              #
-#    Updated: 2024/02/08 15:37:18 by abolea           ###   ########.fr        #
+#    Updated: 2024/02/15 17:42:58 by abolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,10 @@ NAME = push_swap
 
 PRINTF_FILE	=	ft_printf/libftprintf.a
 
-LIBFT_FILE	=	libft/libft.a
-
 SRC = main.c fill_stack.c list.c check_error.c a_function.c \
-little_list.c b_function.c utils.c algo.c
-#   a_b_functions.c 
+little_list.c b_function.c utils.c algo.c a_b_functions.c \
+utils2.c cost.c
+
 
 OBJ = $(SRC:.c=.o)
 
@@ -33,19 +32,15 @@ all : $(NAME)
 
 $(NAME): $(OBJ) push_swap.h
 		make -sC ft_printf
-		make -sC libft
-		$(CC) $(FLAGS) $(OBJ) -L ft_printf -l ftprintf -L libft -l ft -o $(NAME)
+		$(CC) $(FLAGS) $(OBJ) -L ft_printf -l ftprintf -o $(NAME)
 
 clean :
 		rm -f $(OBJ)
 		make -sC ft_printf clean
-		make -sC libft clean
 
 fclean : clean
 		rm -f $(NAME)
 		rm -f $(PRINTF_FILE)
-		rm -f $(LIBFT_FILE)
-		
 
 re : fclean all
 
