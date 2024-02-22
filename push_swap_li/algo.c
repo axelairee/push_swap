@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:28:21 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/16 13:20:25 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/16 14:50:13 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	r_or_rr(t_swap **lst, t_swap **lstb, t_val *val)
 		val->nb_rotate_b--;
 	}
 }
-
 
 int	cost_min_b(t_swap *lstb, t_swap *lst, t_val *val)
 {

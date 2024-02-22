@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:46:40 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/15 16:51:07 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/19 11:16:29 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_letter(int i, char **argv)
 	while (argv[i][j])
 	{
 		if ((!(argv[i][j] >= '0' && argv[i][j] <= '9')) && \
-		argv[i][j] != '-' && argv[i][j] != '+' && argv[i][j] != ' ')
+		argv[i][j] != '-' && argv[i][j] != '+' && argv[i][j] != ' ' )
 			return (0);
 		if (argv[i][j] == '+' || argv[i][j] == '-')
 			if (!(argv[i][j + 1] >= '0' && argv[i][j + 1] <= '9'))

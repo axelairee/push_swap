@@ -6,7 +6,7 @@
 /*   By: abolea <abolea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:21:07 by abolea            #+#    #+#             */
-/*   Updated: 2024/02/16 13:56:04 by abolea           ###   ########.fr       */
+/*   Updated: 2024/02/22 10:53:03 by abolea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,30 @@ typedef struct s_swap
 
 typedef struct s_val
 {
-	int	rb;
-	int	ra;
-	int	i_top_a;
-	int	nb_rotate_b;
-	int	nb_rotate_a;
-	int	mid_a;
+	int		rb;
+	int		ra;
+	int		i_top_a;
+	int		nb_rotate_b;
+	int		nb_rotate_a;
+	int		mid_a;
+	int		top_cost;
+	int		cost_a;
+	int		cost_b;
+	int		top_rb;
+	t_swap	*last_a;
 }	t_val;
 
-int		ft_atoi_swap(char *nptr);
+long	ft_atoi_swap(char *nptr);
 int		check_letter(int i, char **argv);
-void	fill_lst(t_swap **lst, char **argv, int argc);
+int		fill_lst(t_swap **lst, char **argv, int argc);
 int		return_error(int argc, char **argv);
 int		check_duplicate(t_swap *lst);
 int		is_sort(t_swap *lst, t_swap *lstb);
-void	malloc_stack(t_swap *stack);
 void	swap_a(t_swap **lst);
 void	push_a(t_swap **lst, t_swap **lstb);
 void	rotate_a(t_swap	**lst);
 void	reverse_rotate_a(t_swap	**lst);
 void	little_nb(t_swap **lst, t_swap **lstb);
-void	rotate_ab(t_swap **lst, t_swap **lstb);
-void	reverse_rotate_ab(t_swap **lst, t_swap **lstb);
 void	two_nb(t_swap **lst);
 void	three_nb(t_swap	**lst);
 void	push_b(t_swap **lst, t_swap **lstb);
@@ -80,9 +82,6 @@ int		lst_content(t_swap *lst, int i);
 t_swap	*ft_lstnew_p(int content);
 void	a_rotate(t_swap *lst, t_val *val);
 void	r_or_rr(t_swap **lst, t_swap **lstb, t_val *val);
-int calculate_top_cost(t_swap *lst, t_swap *lstb, t_val *val);
-void calculate_rotations(int top_cost, t_swap *lst, t_val *val);
-
-void print_lst(t_swap *lst, t_swap *lstb);
+void	ra_or_rra(t_val *val, int choice);
 
 #endif

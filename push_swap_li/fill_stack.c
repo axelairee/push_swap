@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	fill_lst(t_swap **lst, char **argv, int argc)
+int	fill_lst(t_swap **lst, char **argv, int argc)
 {
 	int		j;
 	int		i;
@@ -28,6 +28,8 @@ void	fill_lst(t_swap **lst, char **argv, int argc)
 			if (arg[j] != ' ')
 			{
 				ft_lstadd_back_p(lst, ft_lstnew_p(ft_atoi_swap(&arg[j])));
+				if (ft_atoi_swap(&arg[j]) == LONG_MAX)
+					return (-1);
 				while (arg[j] && arg[j] != ' ')
 					j++;
 			}
@@ -36,31 +38,36 @@ void	fill_lst(t_swap **lst, char **argv, int argc)
 		}
 		i++;
 	}
+	return (1);
 }
 
-int	ft_atoi_swap(char *nptr)
+long	ft_atoi_swap(char *nptr)
 {
 	int		sign;
-	long	nb;
+	long	result;
 
+	result = 0;
 	sign = 1;
-	nb = 0;
-	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
+	while ((*nptr >= 9 && *nptr <= 13) || *nptr == ' ')
 		nptr++;
-	if (*nptr == '-' || *nptr == '+')
-	{
-		if (*nptr == '-')
-			sign *= -1;
+	if (*nptr == '-')
+		sign = -1;
+	if (*nptr == 45 || *nptr == 43)
 		nptr++;
-	}
 	while (*nptr >= '0' && *nptr <= '9')
 	{
-		nb = nb * 10 + (*nptr - '0');
+		if ((sign == 1 && result > (INT_MAX - (*nptr - '0')) / 10) || \
+			(-result < (-2147483648 + (*nptr - '0')) / 10))
+		{
+			if (sign == 1)
+				return (LONG_MAX);
+			else
+				return (LONG_MAX);
+		}
+		result = result * 10 + (*nptr - '0');
 		nptr++;
 	}
-	if (nb > INT_MAX || nb < INT_MIN)
-		exit(ft_printf("ERROR"));
-	return ((int)(nb * sign));
+	return (result * sign);
 }
 
 int	is_sort(t_swap *lst, t_swap *lstb)
@@ -73,7 +80,7 @@ int	is_sort(t_swap *lst, t_swap *lstb)
 				return (0);
 			lst = lst->next;
 		}
-		return (ft_printf("b"), 1);
+		return (1);
 	}
 	else
 		return (0);

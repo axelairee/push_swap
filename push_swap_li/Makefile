@@ -6,7 +6,7 @@
 #    By: abolea <abolea@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 11:32:23 by abolea            #+#    #+#              #
-#    Updated: 2024/02/15 17:42:58 by abolea           ###   ########.fr        #
+#    Updated: 2024/02/22 14:33:24 by abolea           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME = push_swap
 PRINTF_FILE	=	ft_printf/libftprintf.a
 
 SRC = main.c fill_stack.c list.c check_error.c a_function.c \
-little_list.c b_function.c utils.c algo.c a_b_functions.c \
+little_list.c b_function.c utils.c algo.c \
 utils2.c cost.c
 
 
@@ -27,10 +27,10 @@ OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 
-%.o : %.c
+%.o : %.c push_swap.h
 		$(CC) $(FLAGS) -c $< -o $@
 
-$(NAME): $(OBJ) push_swap.h
+$(NAME): $(OBJ)
 		make -sC ft_printf
 		$(CC) $(FLAGS) $(OBJ) -L ft_printf -l ftprintf -o $(NAME)
 
